@@ -2,12 +2,13 @@
 {
     public class BaseEntity
     {
-        public long Id { get; set; }
-        public DateTime CreationDate { get; set; }
+        public int Id { get; set; }
+        public DateTime ProduceDate { get; set; }
+        public bool IsAvailable { get; set; }
 
         public BaseEntity()
         {
-            CreationDate = DateTime.Now;
+            ProduceDate = DateTime.Now;
         }
     }
 }

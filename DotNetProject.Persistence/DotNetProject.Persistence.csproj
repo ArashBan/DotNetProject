@@ -7,8 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Mappings\" />
-    <Folder Include="Contexts\" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetProject.Application\DotNetProject.Application.csproj" />
+    <ProjectReference Include="..\DotNetProject.Domain\DotNetProject.Domain.csproj" />
   </ItemGroup>
 
 </Project>
