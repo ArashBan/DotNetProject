@@ -4,7 +4,65 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<title>Index Page</title>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 10px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+<h1>Create Record</h1>
+<form method="post" asp-page="./Index" asp-page-handler="Create">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="manufactureemail">Email:</label>
+    <input type="email" id="manufactureemail" name="manufactureemail" required>
+
+    <label for="manufacturephone">Phone:</label>
+    <input type="text" id="manufacturephone" name="manufacturephone" required>
+
+    <button type="submit">Create</button>
+</form>
+
+<table style="margin-top: 30px">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var item in Model.Products)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.ManufactureEmail</td>
+            <td>@item.ManufacturePhone</td>
+            <td>
+                <a asp-page="./Index" asp-page-handler="Delete" asp-route-id="@item.Id">Delete</a>
+                <button id="item-@item.Id" onclick="getItemDetails('@item.Name', '@item.ManufactureEmail', '@item.ManufacturePhone')">Edit</button>
+            </td>
+        </tr>
+    }
+</table>
+
+<script>
+    function getItemDetails(name, manufactureemail, manufacturephone) {
+        document.getElementById('name').value = name;
+        document.getElementById('manufactureemail').value = manufactureemail;
+        document.getElementById('manufacturephone').value = manufacturephone;
+    }
+</script>

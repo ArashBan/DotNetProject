@@ -9,6 +9,7 @@
         public BaseEntity()
         {
             ProduceDate = DateTime.Now;
+            IsAvailable = true;
         }
     }
 }
