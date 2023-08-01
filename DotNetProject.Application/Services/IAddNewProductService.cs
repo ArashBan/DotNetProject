@@ -1,5 +1,4 @@
 ﻿using DotNetProject.Application.DTOs;
-using DotNetProject.Domain.Entities;
 
 namespace DotNetProject.Application.Services
 {

@@ -31,7 +31,7 @@ namespace DotNetProject.Application.Services
         {
             var product = new Product(entity.Name, entity.ManufacturePhone, entity.ManufactureEmail);
 
-            var result = _context.Products.Find(id);
+            var result = GetBy(id);
 
             if (result != null)
             {
@@ -51,7 +51,7 @@ namespace DotNetProject.Application.Services
 
         public ResultDto Delete(int id)
         {
-            var result = _context.Products.Find(id);
+            var result = GetBy(id);
 
             result.IsAvailable = false;
             _context.SaveChanges();
@@ -63,11 +63,6 @@ namespace DotNetProject.Application.Services
             };
         }
 
-        public Product GetBy(long id)
-        {
-            return _context.Products.Find(id);
-        }
-
         public List<AddNewProductDto> GetList()
         {
             return _context.Products.Where(x => x.IsAvailable).Select(x => new AddNewProductDto
@@ -77,6 +72,11 @@ namespace DotNetProject.Application.Services
                 ManufacturePhone = x.ManufacturePhone,
                 ManufactureEmail = x.ManufactureEmail
             }).ToList();
+        }
+
+        public Product GetBy(int id)
+        {
+            return _context.Products.Find(id);
         }
     }
 }

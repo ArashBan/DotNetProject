@@ -4,26 +4,9 @@
     ViewData["Title"] = "Home page";
 }
 
-<title>Index Page</title>
-<style>
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-    }
+<h1>DotNetProject</h1>
 
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 10px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
-</style>
-<h1>Create Record</h1>
-<form method="post" asp-page="./Index" asp-page-handler="Create">
+<form style="margin-top: 40px" method="post" asp-page="./Index" asp-page-handler="Create">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required>
 
@@ -33,10 +16,10 @@
     <label for="manufacturephone">Phone:</label>
     <input type="text" id="manufacturephone" name="manufacturephone" required>
 
-    <button type="submit">Create</button>
+    <button class="button-link" type="submit">Create</button>
 </form>
 
-<table style="margin-top: 30px">
+<table style="margin-top: 40px">
     <tr>
         <th>Id</th>
         <th>Name</th>
@@ -52,8 +35,8 @@
             <td>@item.ManufactureEmail</td>
             <td>@item.ManufacturePhone</td>
             <td>
-                <a asp-page="./Index" asp-page-handler="Delete" asp-route-id="@item.Id">Delete</a>
-                <button id="item-@item.Id" onclick="getItemDetails('@item.Name', '@item.ManufactureEmail', '@item.ManufacturePhone')">Edit</button>
+                <button class="button-link" id="item-@item.Id" onclick="getItemDetails('@item.Name', '@item.ManufactureEmail', '@item.ManufacturePhone')">Edit</button>
+                <a class="button-link" asp-page="./Index" asp-page-handler="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
     }
@@ -66,3 +49,36 @@
         document.getElementById('manufacturephone').value = manufacturephone;
     }
 </script>
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 10px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    .button-link {
+        display: inline-block;
+        padding: 4px 15px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+        .button-link:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+</style>

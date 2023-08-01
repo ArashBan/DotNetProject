@@ -2,7 +2,6 @@
 using DotNetProject.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace EndPoint.Site.Pages
 {
