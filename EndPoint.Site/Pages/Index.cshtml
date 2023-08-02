@@ -6,25 +6,46 @@
 
 <h1>DotNetProject</h1>
 
+@*CREATE*@
 <form style="margin-top: 40px" method="post" asp-page="./Index" asp-page-handler="Create">
+    <h3>Create</h3>
+
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required>
 
-    <label for="manufactureemail">Email:</label>
+    <label for="manufactureemail">Manufacture Email:</label>
     <input type="email" id="manufactureemail" name="manufactureemail" required>
 
-    <label for="manufacturephone">Phone:</label>
+    <label for="manufacturephone">Manufacture Phone:</label>
     <input type="text" id="manufacturephone" name="manufacturephone" required>
 
     <button class="button-link" type="submit">Create</button>
 </form>
 
+@*EDIT*@
+<form style="margin-top: 40px" method="post" asp-page="./Index" asp-page-handler="Edit">
+    <h3>Edit</h3>
+
+    <label for="name">Name:</label>
+    <input type="text" id="nameedit" name="name" disabled required>
+
+    <label for="manufactureemail">Manufacture Email:</label>
+    <input type="email" id="manufactureemailedit" name="manufactureemail" disabled required>
+
+    <label for="manufacturephone">Manufacture Phone:</label>
+    <input type="text" id="manufacturephoneedit" name="manufacturephone" disabled required>
+
+    <button class="button-link" type="submit" disabled="disabled" id="edit">Edit</button>
+    <button class="button-link" onclick="cancelEdit()" disabled="disabled" id="cancel">Cancel Edit</button>
+</form>
+
+@*Show Table*@
 <table style="margin-top: 40px">
     <tr>
         <th>Id</th>
         <th>Name</th>
-        <th>Email</th>
-        <th>Phone</th>
+        <th>Manufacture Email</th>
+        <th>Manufacture Phone</th>
         <th>Actions</th>
     </tr>
     @foreach (var item in Model.Products)
@@ -35,21 +56,43 @@
             <td>@item.ManufactureEmail</td>
             <td>@item.ManufacturePhone</td>
             <td>
-                <button class="button-link" id="item-@item.Id" onclick="getItemDetails('@item.Name', '@item.ManufactureEmail', '@item.ManufacturePhone')">Edit</button>
+                <button class="button-link" asp-page="./Index" asp-route-id="@item.Id" id="item-@item.Id" onclick="getItemDetails('@item.Name', '@item.ManufactureEmail', '@item.ManufacturePhone')">Edit</button>
                 <a class="button-link" asp-page="./Index" asp-page-handler="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
     }
 </table>
 
+@*JavaScript*@
 <script>
-    function getItemDetails(name, manufactureemail, manufacturephone) {
-        document.getElementById('name').value = name;
-        document.getElementById('manufactureemail').value = manufactureemail;
-        document.getElementById('manufacturephone').value = manufacturephone;
+    function getItemDetails(nameedit, manufactureemailedit, manufacturephoneedit) {
+        var nameElement = document.getElementById("nameedit");
+        var emailElement = document.getElementById("manufactureemailedit");
+        var phoneElement = document.getElementById("manufacturephoneedit");
+
+        nameElement.value = nameedit, nameElement.disabled = false;
+        emailElement.value = manufactureemailedit, emailElement.disabled = false;
+        phoneElement.value = manufacturephoneedit, phoneElement.disabled = false;
+
+        document.getElementById("edit").disabled = false;
+        document.getElementById("cancel").disabled = false;
+    }
+
+    function cancelEdit() {
+        var nameElement = document.getElementById("nameedit");
+        var emailElement = document.getElementById("manufactureemailedit");
+        var phoneElement = document.getElementById("manufacturephoneedit");
+
+        nameElement.value = "", nameElement.disabled = true;
+        emailElement.value = "", emailElement.disabled = true;
+        phoneElement.value = "", phoneElement.disabled = true;
+
+        document.getElementById("edit").disabled = true;
+        document.getElementById("cancel").disabled = true;
     }
 </script>
 
+@*CSS*@
 <style>
     table {
         border-collapse: collapse;

@@ -27,11 +27,11 @@ namespace DotNetProject.Application.Services
             };
         }
 
-        public ResultDto Update(AddNewProductDto entity, int id)
+        public ResultDto Edit(AddNewProductDto entity)
         {
             var product = new Product(entity.Name, entity.ManufacturePhone, entity.ManufactureEmail);
 
-            var result = GetBy(id);
+            var result = GetBy(entity.Id);
 
             if (result != null)
             {
@@ -72,6 +72,17 @@ namespace DotNetProject.Application.Services
                 ManufacturePhone = x.ManufacturePhone,
                 ManufactureEmail = x.ManufactureEmail
             }).ToList();
+        }
+
+        public AddNewProductDto GetDetails(int id)
+        {
+            return _context.Products.Select(x => new AddNewProductDto
+            {
+                Id = x.Id,
+                Name = x.Name,
+                ManufacturePhone = x.ManufacturePhone,
+                ManufactureEmail = x.ManufactureEmail
+            }).FirstOrDefault(x => x.Id == id);
         }
 
         public Product GetBy(int id)
